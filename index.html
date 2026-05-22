@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RickDosCorte - Barbearia Premium</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Mono+One&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* =================== GOOGLE FONTS — ESTILO PICHAÇÃO =================== */
+        /* =================== VARIÁVEIS DE COR (B&W) =================== */
+        :root {
+            --bg: #0a0a0a;
+            --bg-2: #131313;
+            --line: #1f1f1f;
+            --muted: #8a8a8a;
+            --fg: #f5f5f0;
+            --accent: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0A0A0A, #0c0c0c, #0A0A0A);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* =================== TIPOGRAFIA =================== */
+        .font-tag {
+            font-family: 'Permanent Marker', cursive;
+            letter-spacing: 0.5px;
+        }
+
+        .font-graffiti {
+            font-family: 'Rubik Mono One', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .font-display {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        /* =================== SPRAY TEXT =================== */
+        .spray-text {
+            color: var(--fg);
+            text-shadow:
+                0 0 1px rgba(255, 255, 255, 0.7),
+                0 0 18px rgba(255, 255, 255, 0.15),
+                2px 2px 0 #000;
+        }
+
+        /* =================== TAG DIVIDER =================== */
+        .tag-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #fff5, #fff, #fff5, transparent);
+            width: 160px;
+            margin: 24px auto;
+        }
+
+        /* =================== CTA BUTTON =================== */
+        .cta-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 38px;
+            background: var(--fg);
+            color: #000;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 4px;
+            font-size: 18px;
+            border: 2px solid var(--fg);
+            transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, letter-spacing 0.25s ease;
+            clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: #000;
+            color: var(--fg);
+            letter-spacing: 6px;
+            transform: translateY(-2px);
+        }
+
+        .cta-ghost {
+            background: transparent;
+            color: var(--fg);
+            border: 2px solid var(--fg);
+        }
+
+        .cta-ghost:hover {
+            background: var(--fg);
+            color: #000;
+        }
+
+        /* =================== NAVBAR =================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+        }
+
+        .logo-text .muted {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        nav {
+            display: none;
+            align-items: center;
+            gap: 32px;
+            font-size: 12px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                display: flex;
+            }
+        }
+
+        /* =================== HERO SECTION =================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: black;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-video {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            z-index: 0 !important;
+            filter: grayscale(100%) opacity(0.75) !important;
+            display: block !important;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+            z-index: 10;
+            display: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 20;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        .hero-tag {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .hero-tag span:first-child {
+            height: 1px;
+            width: 40px;
+            background: white;
+        }
+
+        .hero-tag span:last-child {
+            font-size: 12px;
+            font-family: 'Permanent Marker', cursive;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero h1 {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 32px;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            max-width: 600px;
+        }
+
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 56px;
+            }
+        }
+
+        .hero p {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-top: 24px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .arrow-down {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .arrow-down svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* =================== CARROSSEL EM FORMATO DE U INVERTIDO =================== */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 60px 20px;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* =================== CAROUSEL CARDS =================== */
+        .carousel-card {
+            flex: 0 0 260px;
+            min-width: 260px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                        opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                        z-index 0.4s ease;
+            will-change: transform, opacity, z-index;
+            transform-style: preserve-3d;
+            position: relative;
+            opacity: 0.5;
+            transform: perspective(1200px) translateY(80px) rotateY(0deg) scale(0.85);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .carousel-card:nth-child(1) { animation-delay: 0.1s; }
+        .carousel-card:nth-child(2) { animation-delay: 0.2s; }
+        .carousel-card:nth-child(3) { animation-delay: 0.3s; }
+        .carousel-card:nth-child(n + 4) { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-image {
+            width: 100%;
+            height: 160px;
+            background: #3a3a3a;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            font-size: 18px;
+            color: white;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            line-height: 1.2;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            gap: 12px;
+        }
+
+        .card-price {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 24px;
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        .card-btn {
+            font-size: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 12px;
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .card-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .carousel-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+        }
+
+        /* =================== SECTIONS =================== */
+        section {
+            position: relative;
+            padding: 96px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        section.servicos {
+            background: #0c0c0c;
+        }
+
+        section.feedback {
+            background: #0a0a0a;
+        }
+
+        section.local {
+            background: #0c0c0c;
+        }
+
+        section.contato {
+            background: black;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        section.historia {
+            background: #0a0a0a;
+        }
+
+        .historia .local-text p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 16px;
+        }
+
+        .historia .local-text p:first-of-type {
+            margin-top: 24px;
+        }
+
+        .section-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-tag {
+            font-family: 'Permanent Marker', cursive;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 32px;
+            margin-top: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 40px;
+            }
+        }
+
+        /* =================== FEEDBACK CAROUSEL =================== */
+        .feedback-carousel-container {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 40px 20px;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .feedback-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .feedback-card {
+            flex: 0 0 300px;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform, opacity;
+            transform-style: preserve-3d;
+            position: relative;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .feedback-card:nth-child(1) { animation-delay: 0.1s; }
+        .feedback-card:nth-child(2) { animation-delay: 0.2s; }
+        .feedback-card:nth-child(3) { animation-delay: 0.3s; }
+        .feedback-card:nth-child(n + 4) { animation-delay: 0.4s; }
+
+        .feedback-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .feedback-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feedback-info {
+            flex: 1;
+        }
+
+        .feedback-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            color: white;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .feedback-rating {
+            display: flex;
+            gap: 4px;
+            color: #f1c40f;
+            font-size: 12px;
+        }
+
+        .feedback-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .feedback-date {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* =================== LOCAL SECTION =================== */
+        .local-grid {
+            display: grid;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .local-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .local-text span {
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .local-text h2 {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 32px;
+            margin-top: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .local-text h2 {
+                font-size: 40px;
+            }
+        }
+
+        .local-info {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 16px;
+        }
+
+        .info-item i {
+            font-size: 24px;
+            margin-top: 4px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .info-item p {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .info-item p:first-of-type + p {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0;
+        }
+
+        .urban-box {
+            border: 2px dashed white;
+            box-shadow: 6px 6px 0 #000, 6px 6px 0 2px white;
+            margin-top: 40px;
+            padding: 24px;
+            background: black;
+            position: relative;
+        }
+
+        .urban-box::before {
+            content: '! ATENÇÃO';
+            position: absolute;
+            top: -16px;
+            left: 16px;
+            background: white;
+            color: black;
+            padding: 4px 12px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .urban-box h3 {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .urban-box h3 {
+                font-size: 28px;
+            }
+        }
+
+        .urban-box p {
+            font-size: 12px;
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        /* =================== GPS MAP =================== */
+        .gps-map {
+            background: linear-gradient(180deg, #0c0c0c 0%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            height: 420px;
+        }
+
+        .gps-map::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(#1a1a1a 1px, transparent 1px),
+                linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, #000 40%, transparent 75%);
+        }
+
+        .gps-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .gps-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gps-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .gps-header span {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .gps-live {
+            font-size: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .gps-route {
+            position: absolute;
+            left: 10%;
+            top: 60%;
+            width: 80%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, white 0 12px, transparent 12px 22px);
+            transform: rotate(-8deg);
+        }
+
+        .gps-pin {
+            position: absolute;
+            left: 62%;
+            top: 42%;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15), 0 0 0 14px rgba(255, 255, 255, 0.06);
+            animation: pulse 2s infinite;
+        }
+
+        .gps-info {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 16px;
+            z-index: 10;
+            border-radius: 8px;
+        }
+
+        .gps-info p {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .gps-info p:nth-child(2) {
+            font-weight: 600;
+            margin-top: 4px;
+            color: white;
+            letter-spacing: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gps-info p:nth-child(3) {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .gps-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .gps-btn {
+            font-size: 12px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .gps-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        /* =================== CONTATO =================== */
+        .contato-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contato-content h2 {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 40px;
+            margin-top: 16px;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .contato-content h2 {
+                font-size: 56px;
+            }
+        }
+
+        .contato-content p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 500px;
+            margin: 24px auto;
+            font-size: 12px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        .contato-buttons {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .social-links {
+            margin-top: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            font-size: 12px;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        .social-divider {
+            display: none;
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .social-divider {
+                display: block;
+            }
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        footer p {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        footer p:last-child {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 12px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+        }
+
+        /* =================== WHATSAPP FLUTUANTE =================== */
+        .wpp-float {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 60;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: white;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 0 6px rgba(255, 255, 255, 0.06);
+            transition: transform 0.25s ease;
+            text-decoration: none;
+        }
+
+        .wpp-float:hover {
+            transform: scale(1.08) rotate(-6deg);
+        }
+
+        /* =================== RESPONSIVE =================== */
+        @media (max-width: 768px) {
+            .hero-video {
+                filter: grayscale(100%) opacity(0.5);
+            }
+
+            .carousel-card {
+                flex: 0 0 200px;
+                min-width: 200px;
+                padding: 16px;
+            }
+
+            .card-image {
+                height: 120px;
+            }
+
+            .card-title {
+                font-size: 15px;
+                height: 40px;
+            }
+
+            .card-price {
+                font-size: 20px;
+            }
+
+            .cta-btn {
+                padding: 14px 28px;
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+
+            .cta-btn:hover {
+                letter-spacing: 4px;
+            }
+
+            .feedback-card {
+                flex: 0 0 250px;
+                min-width: 250px;
+                padding: 20px;
+            }
+
+            .feedback-text {
+                font-size: 14px;
+            }
+
+            section {
+                padding: 64px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-video {
+                filter: grayscale(100%) opacity(0.4);
+            }
+
+            .carousel-card {
+                flex: 0 0 140px;
+                min-width: 140px;
+                padding: 12px;
+            }
+
+            .card-image {
+                height: 90px;
+                margin-bottom: 12px;
+            }
+
+            .card-title {
+                font-size: 12px;
+                height: 28px;
+                line-height: 1.1;
+            }
+
+            .card-price {
+                font-size: 14px;
+            }
+
+            .card-btn {
+                font-size: 8px;
+                padding: 3px 6px;
+            }
+
+            .feedback-card {
+                flex: 0 0 180px;
+                min-width: 180px;
+                padding: 14px;
+            }
+
+            .feedback-text {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .feedback-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .feedback-name {
+                font-size: 13px;
+            }
+
+            .feedback-rating {
+                font-size: 10px;
+            }
+
+            .feedback-date {
+                font-size: 10px;
+            }
+
+            .cta-btn {
+                padding: 12px 20px;
+                font-size: 11px;
+                letter-spacing: 1px;
+                gap: 8px;
+            }
+
+            .cta-btn:hover {
+                letter-spacing: 2px;
+            }
+
+            .spray-text {
+                font-size: 24px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            section {
+                padding: 48px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">
+                <img src="https://customer-assets.emergentagent.com/job_7076559c-dce0-42fa-903a-9bea640a9df3/artifacts/zr20sbd3_logo.jpg" alt="RickDosCorte">
+                <span class="logo-text font-display">RICK<span class="muted">DOS</span>CORTE</span>
+            </a>
+            <nav>
+                <a href="#servicos">SERVIÇOS</a>
+                <a href="#feedback">FEEDBACK</a>
+                <a href="#local">LOCAL</a>
+            </nav>
+            <a href="https://wa.me/5547996052594?text=Ol%C3%A1%20Rick!%20Quero%20agendar%20um%20hor%C3%A1rio." target="_blank" class="cta-btn">AGENDAR</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION COM VÍDEO -->
+    <section class="hero" id="hero">
+        <!-- Vídeo de Fundo -->
+        <video 
+            autoplay="autoplay"
+            loop="loop"
+            muted="muted"
+            playsinline="playsinline"
+            preload="auto"
+            class="hero-video"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: grayscale(100%) opacity(0.75);"
+        >
+            <source src="bg-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo HTML5.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span></span>
+                <span>— SINCE 2019 · MONTE ALEGRE</span>
+            </div>
+
+            <h1 class="spray-text font-graffiti">ESTILO. <span class="font-tag">TRADIÇÃO.</span><br><span class="font-graffiti">RICK<span style="color: rgba(255, 255, 255, 0.7);">DOS</span>CORTE.</span></h1>
+
+            <p>Técnica avançada, precisão na navalha e foco na sua melhor versão.<br>Mais que um cuidado, um padrão de elegância urbana.</p>
+
+            <div class="hero-buttons">
+                <a href="https://wa.me/5547996052594?text=Ol%C3%A1%20Rick!%20Quero%20agendar%20um%20hor%C3%A1rio." target="_blank" class="cta-btn">
+                    [ AGENDAR MEU HORÁRIO ] <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="#servicos" class="cta-btn cta-ghost">VER TABELA</a>
+            </div>
+
+            <div class="arrow-down">
+                <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="servicos">
+        <div class="section-content">
+            <div class="section-header">
+                <span class="section-tag font-tag">// CATÁLOGO</span>
+                <h2 class="section-title spray-text font-graffiti">SERVIÇOS & VALORES</h2>
+                <div class="tag-divider"></div>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-container" id="carouselContainer">
+                    <!-- Cards serão inseridos aqui via JavaScript -->
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+                <p style="font-size: 12px; color: rgba(255, 255, 255, 0.4); font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px;">← DESLIZE PARA VER MAIS →</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTÓRIA -->
+    <section id="historia" class="historia">
+        <div class="section-content">
+            <div style="text-align: center; margin-bottom: 56px;">
+                <span class="section-tag font-tag">// O CONCEITO</span>
+                <h2 class="section-title spray-text font-graffiti" style="margin-top: 16px;">MAIS QUE UM CORTE.<br>UMA ASSINATURA.</h2>
+                <div class="tag-divider"></div>
+            </div>
+
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 64px;">
+                    <div>
+                        <p style="font-size: 15px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); margin-bottom: 16px;">
+                            A <strong>Barbearia RickDosCorte</strong> foi concebida para redefinir a experiência de cuidados masculinos, unindo precisão técnica à sofisticação urbana. Cada atendimento é planejado de forma personalizada, transformando o visual de cada cliente em sua melhor versão de autoridade e estilo.
+                        </p>
+                        <p style="font-size: 15px; line-height: 1.8; color: rgba(255, 255, 255, 0.8);">
+                            Nossa equipe é composta por profissionais altamente qualificados, padronizados e comprometidos com a excelência do design capilar contemporâneo. Técnica afiada, estrutura premium e o máximo respeito ao seu tempo.
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 24px; text-align: center;">
+                            <i class="fa-solid fa-razor" style="font-size: 32px; color: #f1c40f; margin-bottom: 12px; display: block;"></i>
+                            <h3 style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 14px; color: white; margin-bottom: 8px;">NAVALHA AFIADA</h3>
+                            <p style="font-size: 13px; color: rgba(255, 255, 255, 0.7);">Acabamento navalhado preciso, o detalhe que separa o corte do <em>corte.</em></p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 24px; text-align: center;">
+                            <i class="fa-solid fa-sliders" style="font-size: 32px; color: #f1c40f; margin-bottom: 12px; display: block;"></i>
+                            <h3 style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 14px; color: white; margin-bottom: 8px;">MÁQUINA FIRME</h3>
+                            <p style="font-size: 13px; color: rgba(255, 255, 255, 0.7);">Técnicas avançadas de fade e visagismo adaptados ao seu perfil. Excelência do primeiro ao último movimento.</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 24px; text-align: center;">
+                            <i class="fa-solid fa-user-tie" style="font-size: 32px; color: #f1c40f; margin-bottom: 12px; display: block;"></i>
+                            <h3 style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 14px; color: white; margin-bottom: 8px;">IDENTIDADE URBANA</h3>
+                            <p style="font-size: 13px; color: rgba(255, 255, 255, 0.7);">Ambiente imersivo que conecta comportamento, estilo e bem-estar em uma experiência única.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 64px; padding-top: 64px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 16px; color: rgba(255, 255, 255, 0.6); margin-bottom: 32px;">// NOSSA TRAJETÓRIA</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; max-width: 800px; margin: 0 auto;">
+                    <div>
+                        <p style="font-family: 'Rubik Mono One', sans-serif; font-size: 36px; color: #f1c40f; margin-bottom: 8px;">5+</p>
+                        <p style="font-size: 13px; color: rgba(255, 255, 255, 0.8); font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">ANOS DE EXCELÊNCIA</p>
+                    </div>
+                    <div>
+                        <p style="font-family: 'Rubik Mono One', sans-serif; font-size: 36px; color: #f1c40f; margin-bottom: 8px;">1000+</p>
+                        <p style="font-size: 13px; color: rgba(255, 255, 255, 0.8); font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">CLIENTES SATISFEITOS</p>
+                    </div>
+                    <div>
+                        <p style="font-family: 'Rubik Mono One', sans-serif; font-size: 36px; color: #f1c40f; margin-bottom: 8px;">100%</p>
+                        <p style="font-size: 13px; color: rgba(255, 255, 255, 0.8); font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">COMPROMETIMENTO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="feedback" class="feedback">
+        <div class="section-content">
+            <div class="section-header">
+                <span class="section-tag font-tag">// AVALIAÇÕES</span>
+                <h2 class="section-title spray-text font-graffiti">O QUE NOSSOS CLIENTES DIZEM</h2>
+                <div class="tag-divider"></div>
+            </div>
+
+            <div class="feedback-carousel-container" id="feedbackContainer">
+                <!-- Feedback cards serão inseridos aqui via JavaScript -->
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+                <p style="font-size: 12px; color: rgba(255, 255, 255, 0.4); font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px;">← DESLIZE PARA VER MAIS AVALIAÇÕES →</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCAL -->
+    <section id="local" class="local">
+        <div class="section-content">
+            <div class="local-grid">
+                <div>
+                    <span class="font-display">// REFERÊNCIA EM ESTILO E EXCELÊNCIA</span>
+                    <div class="local-text">
+                        <h2 class="spray-text font-graffiti">NOSSO <span style="color: rgba(255, 255, 255, 0.7);">Espaço</span>.<br> SUA EXPERIÊNCIA.</h2>
+                        <div class="tag-divider"></div>
+
+                        <div class="local-info">
+                            <div class="info-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <p>ENDEREÇO</p>
+                                    <p>Rua Monte Juliana, 460 — Monte Alegre</p>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <i class="fa-regular fa-clock"></i>
+                                <div>
+                                    <p>HORÁRIO</p>
+                                    <p>Seg — Sáb · 09:00 às 20:00</p>
+                                    <p>Domingo: fechado</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="urban-box">
+                            <h3 class="spray-text font-graffiti">ATENDIMENTO POR<br>ORDEM DE CHEGADA.</h3>
+                            <p>Priorizamos a dinâmica de atendimento por fluxo de chegada. Registre seu nome na recepção e aguarde em nosso espaço com total comodidade.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="gps-map">
+                        <div class="gps-header">
+                            <div class="gps-header-left">
+                                <span class="gps-pulse"></span>
+                                <span>GPS · RICKDOSCORTE</span>
+                            </div>
+                            <span class="gps-live">LIVE</span>
+                        </div>
+
+                        <div class="gps-route"></div>
+                        <div class="gps-pin"></div>
+
+                        <div class="gps-info">
+                            <p>DESTINO</p>
+                            <p>Rua Monte Juliana, 460</p>
+                            <p>Monte Alegre</p>
+                            <div class="gps-buttons">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Monte+Juliana+460+Monte+Alegre" target="_blank" class="gps-btn">
+                                    ABRIR NO MAPA <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="contato">
+        <div class="contato-content">
+            <span class="section-tag font-tag">// HORA DE FECHAR O CORTE</span>
+            <h2 class="spray-text font-graffiti">BORA MARCAR.</h2>
+            <p>Chama no WhatsApp. Agendamento simplificado e atendimento no seu ritmo.</p>
+
+            <div class="contato-buttons">
+                <a href="https://wa.me/5547996052594?text=Ol%C3%A1%20Rick!%20Quero%20fechar%20um%20hor%C3%A1rio." target="_blank" class="cta-btn">
+                    CHAMAR NO WHATSAPP <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="#" class="cta-btn cta-ghost">VOLTAR AO TOPO</a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.instagram.com/barbearia_rickduscort/" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>@BARBEARIA_RICKDUSCORT</span>
+                </a>
+                <span class="social-divider"></span>
+                <a href="https://wa.me/5547996052594" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>(47) 99605-2594</span>
+                </a>
+            </div>
+
+            <footer>
+                <p class="font-graffiti">RICK<span style="color: rgba(255, 255, 255, 0.6);">DOS</span>CORTE</p>
+                <p class="font-display">© 2026 · TODOS OS DIREITOS RESERVADOS · MONTE ALEGRE</p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/5547996052594?text=Ol%C3%A1%20Rick!%20Quero%20agendar%20um%20hor%C3%A1rio." target="_blank" class="wpp-float" aria-label="Falar no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Dados dos serviços
+        const servicos = [
+            { nome: 'SOCIAL', preco: '35', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-social-ZKy5J3WiqzZBu3wjgMxNce.webp' },
+            { nome: 'DEGRADÊ', preco: '40', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-degrade-RAJp4vyfsMfHSMfDFDTeoZ.webp' },
+            { nome: 'DEGRADÊ NAVALHADO', preco: '45', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-degrade-navalhado-k2ZAgba3NsmZzkcyUQ7QBe.webp' },
+            { nome: 'BARBA', preco: '35', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-barba-NbPgfqkmvoewYg7mJPT4yf.webp' },
+            { nome: 'ACABAMENTO', preco: '15', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-acabamento-ReQU3WZRU4pfYNgbAjZCV4.webp' },
+            { nome: 'BIGODE', preco: '7', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-bigode-KgsdrUTwDRicLpugFTRKRE.webp' },
+            { nome: 'SOBRANCELHA', preco: '10', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-sobrancelha-3J2FzpozrdWS9W5FnhirCc.webp' },
+            { nome: 'EPILAÇÃO ORELHA / NARIZ', preco: '25', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-limpeza-facial-hMjird8Qc5ZenKPv9To9Qi.webp' },
+            { nome: 'LIMPEZA FACIAL', preco: '20', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-limpeza-facial-hMjird8Qc5ZenKPv9To9Qi.webp' },
+            { nome: 'HIDRATAÇÃO CAPILAR', preco: '25', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-hidratacao-27NsnQ5agMwy7NxaAAjMLq.webp' },
+            { nome: 'PLATINADO / NEVOU', preco: '160', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-coloracao-Hg6o5agQGe6DKNViP23DSR.webp' },
+            { nome: 'LUZES', preco: '130', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-degrade-RAJp4vyfsMfHSMfDFDTeoZ.webp' },
+            { nome: 'PIGMENTAÇÃO', preco: '35', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-coloracao-Hg6o5agQGe6DKNViP23DSR.webp' },
+            { nome: 'SELAGEM', preco: '40', imagem: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663644677686/fD3WBpL45iXma3RSL2f79i/servico-hidratacao-27NsnQ5agMwy7NxaAAjMLq.webp' },
+        ];
+
+        // Dados dos feedbacks
+        const feedbacks = [
+            { nome: 'Carlos Silva', foto: 'https://i.pravatar.cc/150?img=1', rating: 5, comentario: 'Melhor corte que já fiz! Rick tem uma precisão impressionante com a navalha. Super recomendo!', data: 'há 2 semanas' },
+            { nome: 'João Santos', foto: 'https://i.pravatar.cc/150?img=2', rating: 5, comentario: 'Atendimento impecável, ambiente limpo e profissional. Voltarei com certeza!', data: 'há 1 mês' },
+            { nome: 'Pedro Costa', foto: 'https://i.pravatar.cc/150?img=3', rating: 5, comentario: 'Rick é um artista! Meu degradê ficou perfeito. Recomendo para todos os amigos!', data: 'há 3 semanas' },
+            { nome: 'Lucas Oliveira', foto: 'https://i.pravatar.cc/150?img=4', rating: 5, comentario: 'Primeira vez aqui e já virou meu barbeiro de confiança. Excelente trabalho!', data: 'há 1 semana' },
+            { nome: 'Rafael Martins', foto: 'https://i.pravatar.cc/150?img=5', rating: 5, comentario: 'Técnica impecável, ambiente acolhedor. Muito bom mesmo!', data: 'há 4 dias' }
+        ];
+
+        // Renderizar serviços
+        const carouselContainer = document.getElementById('carouselContainer');
+        servicos.forEach(servico => {
+            const card = document.createElement('div');
+            card.className = 'carousel-card';
+            card.innerHTML = `
+                <div class="card-image">
+                    <img src="${servico.imagem}" alt="${servico.nome}">
+                </div>
+                <h3 class="card-title">${servico.nome}</h3>
+                <div class="card-footer">
+                    <span class="card-price">R$ ${servico.preco}</span>
+                    <a href="https://wa.me/5547996052594?text=Ol%C3%A1%20Rick!%20Quero%20agendar%20um%20hor%C3%A1rio." target="_blank" class="card-btn">AGENDAR</a>
+                </div>
+            `;
+            carouselContainer.appendChild(card);
+        });
+
+        // Renderizar feedbacks
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        feedbacks.forEach(feedback => {
+            const stars = Array(feedback.rating).fill('<i class="fa-solid fa-star"></i>').join('');
+            const card = document.createElement('div');
+            card.className = 'feedback-card';
+            card.innerHTML = `
+                <div class="feedback-header">
+                    <img src="${feedback.foto}" alt="${feedback.nome}" class="feedback-avatar">
+                    <div class="feedback-info">
+                        <h3 class="feedback-name">${feedback.nome}</h3>
+                        <div class="feedback-rating">${stars}</div>
+                    </div>
+                </div>
+                <p class="feedback-text">${feedback.comentario}</p>
+                <p class="feedback-date">${feedback.data}</p>
+            `;
+            feedbackContainer.appendChild(card);
+        });
+
+        // Efeito de U invertido para o carrossel
+        const container = document.getElementById('carouselContainer');
+        
+        function updateCardTransforms() {
+            const cards = container.querySelectorAll('.carousel-card');
+            const containerRect = container.getBoundingClientRect();
+            const containerCenter = containerRect.width / 2;
+
+            cards.forEach((card) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left - containerRect.left + cardRect.width / 2;
+
+                const distance = cardCenter - containerCenter;
+                const normalizedDistance = distance / (containerRect.width / 2);
+
+                const yOffset = Math.abs(normalizedDistance) * 80;
+                const scale = 1 - Math.abs(normalizedDistance) * 0.2;
+                const rotateY = normalizedDistance * 30;
+                const opacity = Math.max(0.3, 1 - Math.abs(normalizedDistance) * 0.7);
+                const zIndex = Math.round((1 - Math.abs(normalizedDistance)) * 100);
+
+                card.style.transform = `perspective(1200px) translateY(${yOffset}px) rotateY(${rotateY}deg) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+            });
+        }
+
+        container.addEventListener('scroll', updateCardTransforms);
+        updateCardTransforms();
+
+        // Inicializar vídeo
+        const video = document.querySelector('.hero-video');
+        if (video) {
+            video.addEventListener('loadedmetadata', function() {
+                console.log('Vídeo carregado com sucesso');
+                this.play().catch(err => {
+                    console.log('Autoplay bloqueado:', err);
+                    // Tentar play novamente após interação do usuário
+                    document.addEventListener('click', () => {
+                        video.play().catch(e => console.log('Erro ao fazer play:', e));
+                    }, { once: true });
+                });
+            });
+
+            video.addEventListener('error', function() {
+                console.error('Erro ao carregar vídeo. Verifique se o arquivo bg-video.mp4 existe.');
+            });
+        }
+
+        // Scroll suave para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
